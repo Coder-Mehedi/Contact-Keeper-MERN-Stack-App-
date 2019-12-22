@@ -1,12 +1,15 @@
 const express = require('express');
 const connectDB = require('./config/db')
 const app = express();
+const cors = require('cors');
+
 
 // Connect Database
 connectDB();
 
 // Init MiddleWare
 app.use(express.json({ extended: true }))
+app.use(cors())
 
 app.get('/', (req, res) => {
     res.json({ msg: 'Welcometo the contacKeeper api' })
