@@ -2,19 +2,23 @@ import React, { useState, useContext, useEffect } from 'react';
 import AlertContext from '../../contexts/alert/alertContext'
 import AuthContext from '../../contexts/auth/AuthContext'
 
-const Register = () => {
+const Register = props => {
     const alertContext = useContext(AlertContext)
     const authContext = useContext(AuthContext)
 
     const { setAlert } = alertContext
-    const { register, error, clearErrors } = authContext
+    const { register, error, clearErrors, isAuthenticated } = authContext
 
     useEffect(() => {
+        if (isAuthenticated) {
+            props.history.push('/')
+        }
         if (error === 'User already Exists') {
             setAlert(error, 'danger')
             clearErrors()
         }
-    }, [error])
+        // eslint-disable-next-line
+    }, [error, isAuthenticated, props.history])
 
     const [user, setUser] = useState({
         name: '',
@@ -44,25 +48,25 @@ const Register = () => {
         <div className="form-container">
             <h1>Account <span className="text-primary">Register</span></h1>
             <form onSubmit={onSubmit}>
-                <div class="form-group">
+                <div className="form-group">
                     <label htmlFor="name">Name</label>
                     <input type="text" name="name" id="name" value={name}
                     onChange={onChange}/>
                 </div>
                 
-                <div class="form-group">
+                <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input type="email" name="email" id="email" value={email}
                     onChange={onChange}/>
                 </div>
                 
-                <div class="form-group">
+                <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" id="password" value={password}
                     onChange={onChange}/>
                 </div>
                 
-                <div class="form-group">
+                <div className="form-group">
                     <label htmlFor="password2">Confirm Password</label>
                     <input type="password" name="password2" id="password2" value={password2}
                     onChange={onChange}/>
