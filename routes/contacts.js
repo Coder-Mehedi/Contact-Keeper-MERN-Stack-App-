@@ -7,9 +7,9 @@ const { check, validationResult } = require('express-validator');
 const User = require('../models/User')
 const Contact = require('../models/Contact')
 
-// @route GET api/contacts
-// @desc get all  user contacts
-// @access Private
+// @route   GET api/contacts
+// @desc    Get all  users contacts
+// @access  Private
 router.get('/', auth, async(req, res) => {
     try {
         const contacts = await Contact.find({ user: req.user.id }).sort({ date: -1 })
@@ -21,9 +21,9 @@ router.get('/', auth, async(req, res) => {
     }
 })
 
-// @route POST api/contacts
-// @desc Add new Contact
-// @access Private
+// @route   POST api/contacts
+// @desc    Add new Contact
+// @access  Private
 router.post('/', [auth, [
         check('name', 'Name is required').not().isEmpty()
     ]],
@@ -52,9 +52,9 @@ router.post('/', [auth, [
         }
     })
 
-// @route PUT api/contacts/:id
-// @desc Update Contact
-// @access Private
+// @route   PUT api/contacts/:id
+// @desc    Update Contact
+// @access  Private
 router.put('/:id', async(req, res) => {
     res.send('Update Contact')
 })

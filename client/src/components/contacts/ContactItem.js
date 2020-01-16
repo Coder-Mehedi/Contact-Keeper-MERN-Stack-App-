@@ -19,7 +19,7 @@ const ContactItem = ({ contact }) => {
             <h3 className="text-primary text-left">
                 { name } {' '}<span style={{ float: 'right' }}
                 className={'badge ' + (type === 'professional' ? 'badge-success' : 'badge-primary')}>
-                    { type.charAt(0).toUpperCase() + type.slice(1)}
+                    { type }
                 </span>
             </h3>
             <ul className="list">
