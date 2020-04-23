@@ -10,10 +10,6 @@ connectDB();
 app.use(express.json({ extended: true }));
 app.use(cors());
 
-app.get("/", (req, res) => {
-	res.json({ msg: "Welcometo the contacKeeper api" });
-});
-
 // Import Routes
 const userRoute = require("./routes/users");
 const contactsRoute = require("./routes/contacts");
